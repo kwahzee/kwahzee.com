@@ -1,11 +1,11 @@
-body {
-    font-family: "Londrina Outline", sans-serif;
+.oblique-page {
+    font-family: var(--font-londrina), sans-serif;
     font-weight: 400;
     font-style: normal;
-    background-color: #d2d2d2;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;  
+    align-items: center;
     flex-direction: column;
     gap: 20px;
 }
@@ -20,17 +20,17 @@ video {
     z-index: -1;
 }
 
-.heading{
+.heading {
     margin-top: 10px;
     margin-bottom: 10px;
-    font-family: "Rock 3D", system-ui;
+    font-family: var(--font-rock), system-ui;
     font-weight: 400;
-    font-style: normal; 
-    font-size: 60px; 
+    font-style: normal;
+    font-size: 60px;
 }
 
 .card {
-    font-family: "Yuji Syuku", serif;
+    font-family: var(--font-yuji), serif;
     font-weight: 400;
     font-style: normal;
     font-size: 20px;
@@ -42,13 +42,13 @@ video {
     border-style: outset;
     display: flex;
     justify-content: center;
-    align-items: center;  
+    align-items: center;
     text-align: center;
     padding: 50px;
-    }
+}
 
 .button {
-    font-family: "Yuji Syuku", serif;
+    font-family: var(--font-yuji), serif;
     font-weight: 400;
     font-style: normal;
     font-size: 17px;
@@ -58,21 +58,32 @@ video {
     background-color: #c0c0c0;
     background: linear-gradient(to bottom, #f0f0f0, #d0d0d0);
     border: solid;
-    border-style:outset;
+    border-style: outset;
     border-radius: 10px;
-    box-shadow: 10px;  
-    transition: transform 0.25s; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.25s;
 }
 
 .button:hover {
-    cursor: pointer;;
+    cursor: pointer;
 }
 
-button:active {
+.oblique-page button:active {
     transform: scale(0.95);
 }
 
-footer {
-    font-family: "Yuji Syuku", serif;
-    margin-top: 50px; 
+.oblique-page footer {
+    font-family: var(--font-yuji), serif;
+    margin-top: 50px;
+}
+
+.home-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    color: #101010;
+    text-decoration: none;
+    font-size: 20px;
+    letter-spacing: 2px;
+    z-index: 1000;
 }

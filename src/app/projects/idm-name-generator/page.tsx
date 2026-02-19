@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
 import './styles.css';
 
@@ -49,7 +50,10 @@ export default function IDMGenerator() {
   const [totalGenerated, setTotalGenerated] = useState(0);
   const [secretTriggered, setSecretTriggered] = useState(false);
   const [secretMessage, setSecretMessage] = useState('');
-  const displayRef = useRef<HTMLDivElement>(null);
+  const lengthRef = useRef<HTMLInputElement>(null);
+  const chaosRef = useRef<HTMLInputElement>(null);
+  const amountRef = useRef<HTMLInputElement>(null);
+  const customRef = useRef<HTMLInputElement>(null);
 
   const generateName = (length: number, chaos: number, customInput: string) => {
     const nameParts: string[] = [];
@@ -81,52 +85,41 @@ export default function IDMGenerator() {
 
   const typeMessage = () => {
     const message = "kwahzee.com";
-    let index = 0;
-    
-    const typeNextLetter = () => {
-      if (index < message.length) {
-        setSecretMessage(prev => prev + message[index]);
-        index++;
-        setTimeout(typeNextLetter, 200);
-      }
+    let i = 0;
+    const step = () => {
+      if (i >= message.length) return;
+      const char = message[i];
+      i++;
+      setSecretMessage(prev => prev + char);
+      setTimeout(step, 200);
     };
-    
-    typeNextLetter();
+    step();
   };
 
-  const triggerSecret = () => {
-    const deleteNames = () => {
-      setNames(prev => {
-        if (prev.length > 0) {
-          const newNames = [...prev];
-          const randomIndex = Math.floor(Math.random() * newNames.length);
-          newNames.splice(randomIndex, 1);
-          setTimeout(deleteNames, 25);
-          return newNames;
-        } else {
-          typeMessage();
-          return [];
-        }
-      });
+  const triggerSecret = (initialNames: string[]) => {
+    let remaining = [...initialNames];
+    const deleteStep = () => {
+      if (remaining.length === 0) {
+        typeMessage();
+        return;
+      }
+      const idx = Math.floor(Math.random() * remaining.length);
+      remaining.splice(idx, 1);
+      setNames([...remaining]);
+      setTimeout(deleteStep, 25);
     };
-    
-    deleteNames();
+    deleteStep();
   };
 
   const generate = () => {
-    const lengthInput = document.getElementById('length') as HTMLInputElement;
-    const chaosInput = document.getElementById('chaos') as HTMLInputElement;
-    const amountInput = document.getElementById('amount') as HTMLInputElement;
-    const customInput = document.getElementById('customInput') as HTMLInputElement;
-
-    const length = parseInt(lengthInput.value);
-    const chaos = parseInt(chaosInput.value);
-    const amount = parseInt(amountInput.value);
-    const custom = customInput.value;
+    const length = parseInt(lengthRef.current?.value ?? '1');
+    const chaos = parseInt(chaosRef.current?.value ?? '1');
+    const amount = parseInt(amountRef.current?.value ?? '1');
+    const custom = customRef.current?.value ?? '';
 
     if (totalGenerated >= 999 && !secretTriggered) {
       setSecretTriggered(true);
-      triggerSecret();
+      triggerSecret(names);
       return;
     }
 
@@ -136,11 +129,12 @@ export default function IDMGenerator() {
     for (let i = 0; i < amount; i++) {
       const newTotal = totalGenerated + i + 1;
       setTotalGenerated(newTotal);
-      
+
       if (newTotal >= 999) {
         setSecretTriggered(true);
-        setNames(prev => [...prev, ...newNames]);
-        triggerSecret();
+        const allNames = [...names, ...newNames];
+        setNames(allNames);
+        triggerSecret(allNames);
         return;
       }
       
@@ -151,7 +145,7 @@ export default function IDMGenerator() {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'row' }}>
+    <div className="idm-page">
       <div className="options">
         <div className="header">
           <Image 
@@ -165,31 +159,36 @@ export default function IDMGenerator() {
         </div>
         <div className="controls">
           <label htmlFor="length">Length:</label>
-          <input type="range" id="length" min="1" max="6" defaultValue="1" />
-          
+          <input type="range" id="length" min="1" max="6" defaultValue="1" ref={lengthRef} />
+
           <label htmlFor="chaos">Chaos:</label>
-          <input type="range" id="chaos" min="1" max="3" defaultValue="1" />
-          
+          <input type="range" id="chaos" min="1" max="3" defaultValue="1" ref={chaosRef} />
+
           <label htmlFor="amount">Amount:</label>
-          <input type="range" id="amount" min="1" max="50" defaultValue="1" />
-          
+          <input type="range" id="amount" min="1" max="50" defaultValue="1" ref={amountRef} />
+
           <label htmlFor="customInput">Custom Input:</label>
-          <input type="text" id="customInput" />
+          <input type="text" id="customInput" ref={customRef} />
 
           <button onClick={generate}>Generate</button>
         </div>
       </div>
       
-      <div className="display" ref={displayRef}>
+      <div className="display">
         {!secretMessage && names.map((name, index) => (
           <div key={index} className="name">{name}</div>
         ))}
         {secretMessage && (
-          <div style={{ fontSize: '60px', textAlign: 'center', marginTop: '200px' }}>
-            {secretMessage}
-          </div>
+          secretMessage === 'kwahzee.com'
+            ? <Link href="/" style={{ fontSize: '60px', textAlign: 'center', marginTop: '200px', display: 'block', color: 'white', textDecoration: 'none', cursor: 'pointer' }}>
+                {secretMessage}
+              </Link>
+            : <div style={{ fontSize: '60px', textAlign: 'center', marginTop: '200px' }}>
+                {secretMessage}
+              </div>
         )}
       </div>
+      <Link href="/projects" className="home-btn">&lt; back</Link>
     </div>
   );
 }

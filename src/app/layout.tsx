@@ -1,28 +1,25 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Play } from "next/font/google";
 import "./globals.css";
 import localFont from 'next/font/local';
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import Navigation from "@/components/Navigation";
+
+const play = Play({
+  weight: ['400', '700'],
+  subsets: ['latin'],
+  variable: '--font-play'
+});
 
 const gothicPixels = localFont({
   src: '../../public/fonts/GothicPixels.ttf',
   variable: '--font-gothic'
 });
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  title: "Kwahzee",
-  description: "Personal portfolio and creative projects site built with Next.js",
+  title: "kwahzee",
+  description: "Personal portfolio and creative projects",
 };
 
 export default function RootLayout({
@@ -31,10 +28,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={gothicPixels.variable}>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="en" className={`${gothicPixels.variable} ${play.variable}`}>
+      <body style={{ letterSpacing: '1px' }}>
+        <Navigation />
         {children}
         <Analytics />
         <SpeedInsights />

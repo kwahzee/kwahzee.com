@@ -1,7 +1,13 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import './styles.css';
+import { Londrina_Outline, Rock_3D, Yuji_Syuku } from 'next/font/google';
+
+const londrinaOutline = Londrina_Outline({ weight: '400', subsets: ['latin'] });
+const rock3d = Rock_3D({ weight: '400', subsets: ['latin'] });
+const yujiSyuku = Yuji_Syuku({ weight: '400', subsets: ['latin'] });
 
 const strategies = [
   "Abandon normal instruments",
@@ -140,17 +146,21 @@ export default function ObliqueStrategies() {
   };
 
   return (
-    <>
+    <div className="oblique-page" style={{
+      '--font-londrina': londrinaOutline.style.fontFamily,
+      '--font-rock': rock3d.style.fontFamily,
+      '--font-yuji': yujiSyuku.style.fontFamily,
+    } as React.CSSProperties}>
       <video autoPlay loop muted playsInline>
         <source src="/videos/wind.mp4" type="video/mp4" />
       </video>
-      
       <h1 className="heading">oblique strategies</h1>
       <button className="button" onClick={displayStrategy}>New Strategy</button>
       <div className="card">
         {currentStrategy}
       </div>
       <footer>Text by Brian Eno and Peter Schmidt</footer>
-    </>
+      <Link href="/projects" className="home-btn">← back</Link>
+    </div>
   );
 }

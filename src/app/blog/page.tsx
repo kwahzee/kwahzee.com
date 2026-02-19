@@ -1,34 +1,36 @@
+const posts = [
+  {
+    date: '',
+    title: '',
+    body: '',
+  },
+];
+
 export default function Blog() {
   return (
     <main style={{
-      padding: '40px',
-      maxWidth: '800px',
+      maxWidth: '660px',
       margin: '0 auto',
-      backgroundColor: '#f0f0f0',
+      padding: '80px 20px 60px',
+      backgroundColor: '#ffffff',
       minHeight: '100vh',
-      fontFamily: 'Comic Sans MS, cursive'
+      fontFamily: 'Times New Roman, Times, serif',
+      color: '#000000',
+      fontSize: '15px',
+      lineHeight: '1.7',
     }}>
-      <h1 style={{ 
-        color: '#ff00ff',
-        textAlign: 'center',
-        fontSize: '48px',
-        textShadow: '2px 2px #00ffff'
-      }}>
-        blog
-      </h1>
-      
-      <p style={{ textAlign: 'center', color: '#0000ff' }}>
-        updates • projects • thoughts
-      </p>
+      <header style={{ borderBottom: '1px solid #000000', paddingBottom: '10px', marginBottom: '40px' }}>
+        <h1 style={{ fontSize: '20px', fontWeight: 'bold', margin: '0 0 4px 0' }}>kwahzee</h1>
+      </header>
 
-      <div style={{ marginTop: '40px' }}>
-        <p style={{ textAlign: 'center', fontSize: '20px' }}>
-          🚧 under construction 🚧
-        </p>
-        <p style={{ textAlign: 'center', color: '#666' }}>
-          blog posts coming soon...
-        </p>
-      </div>
+      {posts.map((post, i) => (
+        <article key={i} style={{ marginBottom: '40px' }}>
+          <time style={{ fontSize: '12px', color: '#777777' }}>{post.date}</time>
+          <h2 style={{ fontSize: '16px', fontWeight: 'bold', margin: '4px 0 12px 0' }}>{post.title}</h2>
+          <p style={{ margin: '0 0 20px 0' }}>{post.body}</p>
+          <hr style={{ border: 'none', borderTop: '1px solid #dddddd', margin: 0 }} />
+        </article>
+      ))}
     </main>
   );
 }
