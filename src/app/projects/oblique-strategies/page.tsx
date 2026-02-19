@@ -155,7 +155,7 @@ export default function ObliqueStrategies() {
         <source src="/videos/wind.mp4" type="video/mp4" />
       </video>
       <h1 className="heading">oblique strategies</h1>
-      <button className="button" onClick={displayStrategy}>New Strategy</button>
+      <button className="button" onClick={displayStrategy}>Draw Card</button>
       <div className="card">
         {currentStrategy}
       </div>

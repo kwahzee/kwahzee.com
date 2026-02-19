@@ -117,7 +117,7 @@ export default function IDMGenerator() {
     const amount = parseInt(amountRef.current?.value ?? '1');
     const custom = customRef.current?.value ?? '';
 
-    if (totalGenerated >= 999 && !secretTriggered) {
+    if (totalGenerated >= 333 && !secretTriggered) {
       setSecretTriggered(true);
       triggerSecret(names);
       return;
