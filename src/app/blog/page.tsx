@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 const posts = [
   {
     date: 'February 19 2026',
@@ -19,9 +21,9 @@ export default function Blog() {
       fontSize: '15px',
       lineHeight: '1.7',
     }}>
-      <header style={{ borderBottom: '1px solid #000000', paddingBottom: '10px', marginBottom: '40px' }}>
-        <h1 style={{ fontSize: '20px', fontWeight: 'bold', margin: '0 0 4px 0' }}>kwahzee</h1>
-      </header>
+      <Link href="/" style={{ display: 'inline-block', marginBottom: '40px', padding: '6px 14px', border: '1px solid #000000', fontFamily: 'inherit', fontSize: '13px', color: '#000000', textDecoration: 'none' }}>
+        go home
+      </Link>
 
       {posts.map((post, i) => (
         <article key={i} style={{ marginBottom: '40px' }}>
@@ -31,6 +33,10 @@ export default function Blog() {
           <hr style={{ border: 'none', borderTop: '1px solid #dddddd', margin: 0 }} />
         </article>
       ))}
+
+      <Link href="/" style={{ display: 'inline-block', marginTop: '20px', padding: '6px 14px', border: '1px solid #000000', fontFamily: 'inherit', fontSize: '13px', color: '#000000', textDecoration: 'none' }}>
+        go home
+      </Link>
     </main>
   );
 }

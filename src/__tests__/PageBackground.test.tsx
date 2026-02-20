@@ -74,15 +74,16 @@ describe('PageBackground', () => {
       const el = await PageBackground({ videoSrc: '/videos/test.mp4' });
       const { container } = render(el);
       const src = container.querySelector('img')?.getAttribute('src') ?? '';
-      expect(src).toMatch(/^\/images\/m(1[0-8]|[1-9])\.png$/);
+      expect(src).toMatch(/^\/images\/m(1[0-2]|[1-9])\.png$/);
     });
 
-    it('selects image m10 when Math.random returns 0.5', async () => {
+    it('selects image m7 when Math.random returns 0.5', async () => {
       jest.spyOn(Math, 'random').mockReturnValue(0.5);
       mockHeaders.mockResolvedValue(makeHeaders('mobile'));
       const el = await PageBackground({ videoSrc: '/videos/test.mp4' });
       const { container } = render(el);
-      expect(container.querySelector('img')).toHaveAttribute('src', '/images/m10.png');
+      // Math.floor(0.5 * 12) + 1 = 7
+      expect(container.querySelector('img')).toHaveAttribute('src', '/images/m7.png');
     });
   });
 
@@ -107,7 +108,7 @@ describe('PageBackground', () => {
       const el = await PageBackground({ videoSrc: '/videos/test.mp4' });
       const { container } = render(el);
       const src = container.querySelector('img')?.getAttribute('src') ?? '';
-      expect(src).toMatch(/^\/images\/m(1[0-8]|[1-9])\.png$/);
+      expect(src).toMatch(/^\/images\/m(1[0-2]|[1-9])\.png$/);
     });
   });
 });

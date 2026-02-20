@@ -5,12 +5,13 @@ export function proxy(request: NextRequest) {
   const isMobile = /iPhone|Android.*Mobile|iPod/.test(ua);
   const isTablet = /iPad|Android(?!.*Mobile)/.test(ua);
 
-  const response = NextResponse.next();
-  response.headers.set(
-    'x-device-type',
-    isMobile ? 'mobile' : isTablet ? 'tablet' : 'desktop'
-  );
-  return response;
+  const deviceType = isMobile ? 'mobile' : isTablet ? 'tablet' : 'desktop';
+
+  // Set on the *request* headers so Server Components can read them via headers()
+  const headers = new Headers(request.headers);
+  headers.set('x-device-type', deviceType);
+
+  return NextResponse.next({ request: { headers } });
 }
 
 export const config = {

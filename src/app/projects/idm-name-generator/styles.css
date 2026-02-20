@@ -106,3 +106,9 @@ input[type="text"] {
     letter-spacing: 2px;
     z-index: 1000;
 }
+
+@media (max-width: 767px) {
+    .title {
+        display: none;
+    }
+}

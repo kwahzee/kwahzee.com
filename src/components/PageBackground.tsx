@@ -1,7 +1,7 @@
 import { headers } from 'next/headers';
 import Image from 'next/image';
 
-const TOTAL_IMAGES = 18;
+const TOTAL_IMAGES = 12;
 
 interface PageBackgroundProps {
   videoSrc: string;

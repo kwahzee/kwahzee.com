@@ -17,20 +17,18 @@ const albums = [
 
 export default function Audio() {
   return (
-    <main style={{ height: '100vh', overflow: 'hidden', backgroundColor: 'black' }}>
+    <main style={{ minHeight: '100vh', backgroundColor: 'black' }}>
       <PageBackground videoSrc="/videos/memories.mp4" />
 
       <div style={{
-        position: 'fixed',
-        top: '12%',
-        left: '18%',
-        width: '62%',
-        height: '74%',
-        display: 'grid',
-        gridTemplateColumns: '373fr 447fr 434fr 352fr',
-        gridTemplateRows: 'repeat(3, 1fr)',
-        gap: '18px',
+        position: 'relative',
         zIndex: 1,
+        maxWidth: '420px',
+        margin: '0 auto',
+        padding: '100px 20px 60px',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '16px',
       }}>
         {albums.map((album, i) => (
           <a
@@ -38,13 +36,19 @@ export default function Audio() {
             href={album.href}
             target="_blank"
             rel="noopener noreferrer"
-            style={{ position: 'relative', display: 'block', overflow: 'hidden', cursor: 'pointer' }}
+            style={{
+              display: 'block',
+              position: 'relative',
+              width: '100%',
+              aspectRatio: '1 / 1',
+              cursor: 'pointer',
+            }}
           >
             <Image
               src={album.src}
               alt={album.alt}
               fill
-              sizes="18vw"
+              sizes="(max-width: 480px) 90vw, 420px"
               style={{ objectFit: 'contain' }}
             />
           </a>
