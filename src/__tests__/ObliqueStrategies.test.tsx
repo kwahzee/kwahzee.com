@@ -22,20 +22,20 @@ describe('Oblique Strategies', () => {
     expect(screen.getByText('Over One Hundred Worthwhile Dilemmas')).toBeInTheDocument();
   });
 
-  it('has a New Strategy button', () => {
+  it('has a Draw Card button', () => {
     render(<ObliqueStrategies />);
-    expect(screen.getByRole('button', { name: 'New Strategy' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Draw Card' })).toBeInTheDocument();
   });
 
   it('shows a strategy after clicking the button', () => {
     render(<ObliqueStrategies />);
-    fireEvent.click(screen.getByRole('button', { name: 'New Strategy' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Draw Card' }));
     expect(screen.queryByText('Over One Hundred Worthwhile Dilemmas')).not.toBeInTheDocument();
   });
 
   it('shows a different strategy each click without repeating', () => {
     render(<ObliqueStrategies />);
-    const button = screen.getByRole('button', { name: 'New Strategy' });
+    const button = screen.getByRole('button', { name: 'Draw Card' });
     const seen = new Set<string>();
 
     for (let i = 0; i < 10; i++) {
@@ -50,7 +50,7 @@ describe('Oblique Strategies', () => {
 
   it('resets to initial text after all strategies are exhausted', () => {
     render(<ObliqueStrategies />);
-    const button = screen.getByRole('button', { name: 'New Strategy' });
+    const button = screen.getByRole('button', { name: 'Draw Card' });
 
     for (let i = 0; i < STRATEGIES_COUNT; i++) {
       fireEvent.click(button);

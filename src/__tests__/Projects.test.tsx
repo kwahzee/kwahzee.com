@@ -8,6 +8,15 @@ jest.mock('next/link', () => ({
   ),
 }));
 
+jest.mock('@/components/PageBackground', () => ({
+  __esModule: true,
+  default: ({ videoSrc }: { videoSrc: string }) => (
+    <video autoPlay muted loop playsInline>
+      <source src={videoSrc} type="video/mp4" />
+    </video>
+  ),
+}));
+
 describe('Projects page', () => {
   it('renders both project links', () => {
     render(<Projects />);

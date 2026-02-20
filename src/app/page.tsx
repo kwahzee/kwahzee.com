@@ -1,9 +1,9 @@
+import PageBackground from '@/components/PageBackground';
+
 export default function Home() {
   return (
     <>
-      <video autoPlay muted loop id="visions">
-        <source src="/videos/visions.mp4" type="video/mp4" />
-      </video>
+      <PageBackground videoSrc="/videos/visions.mp4" videoId="visions" />
 
       <div className="content">
       </div>

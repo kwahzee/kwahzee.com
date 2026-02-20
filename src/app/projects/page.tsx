@@ -1,26 +1,10 @@
 import Link from 'next/link';
+import PageBackground from '@/components/PageBackground';
 
 export default function Projects() {
   return (
     <main style={{ height: '100vh', overflow: 'hidden', backgroundColor: 'black' }}>
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          objectPosition: 'center',
-          zIndex: 0,
-        }}
-      >
-        <source src="/videos/futures.mp4" type="video/mp4" />
-      </video>
+      <PageBackground videoSrc="/videos/futures.mp4" />
 
       <div style={{
         position: 'fixed',

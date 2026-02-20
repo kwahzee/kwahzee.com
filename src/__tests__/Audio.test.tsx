@@ -6,6 +6,15 @@ jest.mock('next/image', () => ({
   default: ({ src, alt }: { src: string; alt: string }) => <img src={src} alt={alt} />,
 }));
 
+jest.mock('@/components/PageBackground', () => ({
+  __esModule: true,
+  default: ({ videoSrc }: { videoSrc: string }) => (
+    <video autoPlay muted loop playsInline>
+      <source src={videoSrc} type="video/mp4" />
+    </video>
+  ),
+}));
+
 const expectedAlbums = [
   { alt: 'wav', href: 'https://kwahzee.bandcamp.com/album/wav' },
   { alt: 'drones', href: 'https://kwahzee.bandcamp.com/album/here-comes-the-warm-drones' },

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import PageBackground from '@/components/PageBackground';
 
 const albums = [
   { src: '/images/child-inc-wav.jpg', href: 'https://kwahzee.bandcamp.com/album/wav', alt: 'wav' },
@@ -17,24 +18,7 @@ const albums = [
 export default function Audio() {
   return (
     <main style={{ height: '100vh', overflow: 'hidden', backgroundColor: 'black' }}>
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          objectPosition: 'center',
-          zIndex: 0,
-        }}
-      >
-        <source src="/videos/memories.mp4" type="video/mp4" />
-      </video>
+      <PageBackground videoSrc="/videos/memories.mp4" />
 
       <div style={{
         position: 'fixed',
