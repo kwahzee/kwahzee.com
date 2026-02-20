@@ -65,4 +65,45 @@ describe('Navigation', () => {
     render(<Navigation />);
     expect(screen.getByAltText('kwahzee logo').closest('a')).toHaveAttribute('href', '/');
   });
+
+  describe('mobile viewport behavior', () => {
+    afterEach(() => {
+      Object.defineProperty(window, 'innerWidth', { writable: true, configurable: true, value: 1024 });
+    });
+
+    it('hides navigation on /blog at mobile viewport width', () => {
+      Object.defineProperty(window, 'innerWidth', { writable: true, configurable: true, value: 400 });
+      mockUsePathname.mockReturnValue('/blog');
+      const { container } = render(<Navigation />);
+      expect(container.firstChild).toBeNull();
+    });
+
+    it('shows navigation on /blog at desktop viewport width', () => {
+      Object.defineProperty(window, 'innerWidth', { writable: true, configurable: true, value: 1200 });
+      mockUsePathname.mockReturnValue('/blog');
+      render(<Navigation />);
+      expect(screen.getByText('Projects')).toBeInTheDocument();
+    });
+
+    it('shows navigation on / at mobile viewport width', () => {
+      Object.defineProperty(window, 'innerWidth', { writable: true, configurable: true, value: 400 });
+      mockUsePathname.mockReturnValue('/');
+      render(<Navigation />);
+      expect(screen.getByText('Projects')).toBeInTheDocument();
+    });
+
+    it('treats viewport width of exactly 767px as mobile (hides on /blog)', () => {
+      Object.defineProperty(window, 'innerWidth', { writable: true, configurable: true, value: 767 });
+      mockUsePathname.mockReturnValue('/blog');
+      const { container } = render(<Navigation />);
+      expect(container.firstChild).toBeNull();
+    });
+
+    it('treats viewport width of 768px as desktop (shows on /blog)', () => {
+      Object.defineProperty(window, 'innerWidth', { writable: true, configurable: true, value: 768 });
+      mockUsePathname.mockReturnValue('/blog');
+      render(<Navigation />);
+      expect(screen.getByText('Projects')).toBeInTheDocument();
+    });
+  });
 });

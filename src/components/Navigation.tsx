@@ -3,14 +3,22 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { useState, useEffect } from 'react';
 
 export default function Navigation() {
   const pathname = usePathname();
   const isProjectPage = pathname.startsWith('/projects/') && pathname !== '/projects';
+  const [isMobile, setIsMobile] = useState(false);
 
-  if (isProjectPage) {
-    return null;
-  }
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
+  if (isProjectPage) return null;
+  if (pathname === '/blog' && isMobile) return null;
 
   return (
     <>

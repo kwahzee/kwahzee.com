@@ -50,4 +50,9 @@ describe('Projects page', () => {
     expect((video as HTMLVideoElement).muted).toBe(true);
     expect(video).toHaveAttribute('loop');
   });
+
+  it('links container has the projects-links class for responsive positioning', () => {
+    render(<Projects />);
+    expect(document.querySelector('.projects-links')).toBeInTheDocument();
+  });
 });

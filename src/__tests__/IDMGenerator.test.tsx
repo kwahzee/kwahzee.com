@@ -63,4 +63,14 @@ describe('IDM Name Generator', () => {
     const backLink = screen.getByText(/back/i).closest('a');
     expect(backLink).toHaveAttribute('href', '/projects');
   });
+
+  it('renders the logo image', () => {
+    render(<IDMGenerator />);
+    expect(screen.getByAltText('cat')).toBeInTheDocument();
+  });
+
+  it('title element is present in the DOM (CSS hides it on mobile)', () => {
+    render(<IDMGenerator />);
+    expect(document.querySelector('.title')).toBeInTheDocument();
+  });
 });

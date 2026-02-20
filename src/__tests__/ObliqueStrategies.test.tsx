@@ -64,4 +64,10 @@ describe('Oblique Strategies', () => {
     const backLink = screen.getByText(/back/i).closest('a');
     expect(backLink).toHaveAttribute('href', '/projects');
   });
+
+  it('back link has home-btn class for mobile bottom positioning', () => {
+    render(<ObliqueStrategies />);
+    const backLink = screen.getByText(/back/i).closest('a');
+    expect(backLink).toHaveClass('home-btn');
+  });
 });

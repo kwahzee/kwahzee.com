@@ -66,4 +66,26 @@ describe('Audio page', () => {
     expect((video as HTMLVideoElement).muted).toBe(true);
     expect(video).toHaveAttribute('loop');
   });
+
+  it('album links are arranged in a flex column container', () => {
+    render(<Audio />);
+    const links = screen.getAllByRole('link');
+    const column = links[0].parentElement;
+    expect(column).toHaveStyle({ flexDirection: 'column' });
+  });
+
+  it('each album link uses a square 1:1 aspect ratio', () => {
+    render(<Audio />);
+    const links = screen.getAllByRole('link');
+    links.forEach(link => {
+      expect(link).toHaveStyle({ aspectRatio: '1 / 1' });
+    });
+  });
+
+  it('column container has a max-width for readable layout', () => {
+    render(<Audio />);
+    const links = screen.getAllByRole('link');
+    const column = links[0].parentElement;
+    expect(column).toHaveStyle({ maxWidth: '420px' });
+  });
 });

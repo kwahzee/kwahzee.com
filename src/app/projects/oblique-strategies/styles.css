@@ -87,3 +87,14 @@ video {
     letter-spacing: 2px;
     z-index: 1000;
 }
+
+@media (max-width: 767px) {
+    video {
+        height: 100dvh;
+        min-height: -webkit-fill-available;
+    }
+
+    .home-btn {
+        bottom: 80px;
+    }
+}
