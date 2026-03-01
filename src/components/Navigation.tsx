@@ -65,6 +65,9 @@ export default function Navigation() {
         <Link href="/store" style={{ color: '#cacaca', textDecoration: 'none', letterSpacing: '2px' }}>
           Store
         </Link>
+        <Link href="/arcade" style={{ color: '#cacaca', textDecoration: 'none', letterSpacing: '2px' }}>
+          Arcade
+        </Link>
       </nav>
     </>
   );
